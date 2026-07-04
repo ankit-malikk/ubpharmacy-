@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - UB Pharmacy</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- ✅ Load shared database FIRST -->
+  <script src="products-data.js"></script>
+  <!-- ✅ Then load shop page logic -->
+  <script src="shop.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Top Bar -->
+  <div class="bg-teal-700 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-5 py-2 flex justify-between flex-wrap gap-3">
+      <div>📞 +91 8282829844</div>
+      <div>✉️ info@ubpharmacy.com</div>
+      <div>📍 Noida, Uttar Pradesh</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between gap-3 sm:gap-6">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <img src="photo/logo2.png" alt="UB Pharmacy Logo" class="h-10 sm:h-14 w-auto object-contain flex-shrink-0">
+        <div class="min-w-0">
+          <h1 class="font-bold text-lg sm:text-2xl text-teal-700 truncate">
+            <a href="index.html">UB Pharmacy</a>
+          </h1>
+          <p class="hidden sm:block text-xs text-gray-500">Trusted Healthcare Partner</p>
+        </div>
+      </div>
+
+      <!-- Desktop search -->
+      <div class="hidden md:flex flex-1 max-w-2xl">
+        <input type="text" placeholder="Search medicines, health products..." class="flex-1 border border-gray-300 rounded-l-xl px-5 py-3 outline-none min-w-0">
+        <button class="bg-teal-600 text-white px-8 rounded-r-xl hover:bg-teal-700 flex-shrink-0">Search</button>
+      </div>
+      <!-- Right icons -->
+<div class="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+
+  <a href="index.html" class="font-medium hover:text-teal-600 transition">🏠 Home</a>
+  <a href="tel:+918282829844" class="hidden sm:block font-medium hover:text-teal-600 transition">
+    📞 Call Us
+  </a>
+  <a href="tel:+918282829844" class="sm:hidden text-xl">📞</a>
+    <a href="wishlist.html" class="relative font-medium hover:text-teal-600 transition">
+    <span class="hidden sm:inline">♡ Wishlist</span>
+    <span class="sm:hidden text-xl">♡</span>
+    <span id="wishlist-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 rounded-full">0</span>
+  </a>
+
+</div>
+
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <section class="bg-gray-50 py-4">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="flex items-center gap-2 text-sm text-gray-600">
+        <a href="index.html" class="hover:text-teal-600">Home</a>
+        <span>›</span>
+        <span class="text-gray-900 font-medium" id="currentCategory">Shop</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Banner (Dynamic) -->
+  <section id="categoryBanner" class="hidden">
+    <!-- Banner will be inserted here by JavaScript -->
+  </section>
+
+  <!-- Main Shop Section -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      
+      <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- Left Sidebar -->
+        <aside class="lg:w-1/4">
+          
+          <!-- Mobile Filter Toggle -->
+          <button id="mobileFilterToggle" class="lg:hidden w-full bg-teal-600 text-white py-3 rounded-lg mb-4 font-semibold">
+            🔍 Filters
+          </button>
+
+          <!-- Sidebar Content -->
+          <div id="sidebarContent" class="hidden lg:block space-y-6">
+            
+            <!-- Product Categories -->
+            <div class="bg-gray-50 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4 text-gray-800">Product Categories</h3>
+              <div class="space-y-2">
+                <a href="shop.html" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">All Products</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-all">16</span>
+                </a>
+                <a href="shop.html?category=uncategorized" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Uncategorized</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold">22</span>
+                </a>
+                <a href="shop.html?category=abbott" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Abbott</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold">10</span>
+                </a>
+               <a href="shop.html?category=allopathy" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+  <span class="group-hover:translate-x-1 transition-transform">Allopathy</span>
+  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-allopathy">0</span>
+</a>
+                <a href="shop.html?category=ayurvedic" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Ayurvedic</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-ayurvedic">4</span>
+                </a>
+                <a href="shop.html?category=corona" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Fight Against Corona</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-corona">4</span>
+                </a>
+                <a href="shop.html?category=baby-care" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Mother & Baby Care</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-baby-care">4</span>
+                </a>
+                <a href="shop.html?category=personal-care" class="flex justify-between items-center py-2 hover:text-teal-600 transition group">
+                  <span class="group-hover:translate-x-1 transition-transform">Personal Care</span>
+                  <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs font-semibold" id="count-personal-care">4</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Price Filter
+            <div class="bg-gray-50 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4 text-gray-800">Filter by Price</h3>
+              <div class="space-y-3">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="price-filter w-4 h-4" data-min="0" data-max="50">
+                  <span>Under ₹50</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="price-filter w-4 h-4" data-min="50" data-max="100">
+                  <span>₹50 - ₹100</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="price-filter w-4 h-4" data-min="100" data-max="200">
+                  <span>₹100 - ₹200</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="price-filter w-4 h-4" data-min="200" data-max="999999">
+                  <span>Above ₹200</span>
+                </label>
+              </div>
+            </div> -->
+
+            <!-- Top Brands -->
+            <!-- <div class="bg-gray-50 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4 text-gray-800">Top Brands</h3>
+              <div class="space-y-3">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="brand-filter w-4 h-4" data-brand="himalaya">
+                  <span>Himalaya</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="brand-filter w-4 h-4" data-brand="dabur">
+                  <span>Dabur</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="brand-filter w-4 h-4" data-brand="patanjali">
+                  <span>Patanjali</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="brand-filter w-4 h-4" data-brand="baidyanath">
+                  <span>Baidyanath</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="checkbox" class="brand-filter w-4 h-4" data-brand="johnson">
+                  <span>Johnson's</span>
+                </label>
+              </div>
+            </div> -->
+
+            <!-- Rating Filter -->
+            <!-- <div class="bg-gray-50 rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-4 text-gray-800">Customer Rating</h3>
+              <div class="space-y-3">
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="radio" name="rating" class="rating-filter w-4 h-4" data-rating="5">
+                  <span class="text-yellow-400">★★★★★</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="radio" name="rating" class="rating-filter w-4 h-4" data-rating="4">
+                  <span class="text-yellow-400">★★★★☆ & Up</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer hover:text-teal-600 transition">
+                  <input type="radio" name="rating" class="rating-filter w-4 h-4" data-rating="3">
+                  <span class="text-yellow-400">★★★☆☆ & Up</span>
+                </label>
+              </div>
+            </div> -->
+
+            <!-- Clear Filters -->
+            <button id="clearFilters" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold transition">
+              Clear All Filters
+            </button>
+
+          </div>
+        </aside>
+
+        <!-- Right Content Area -->
+        <main class="lg:w-3/4">
+          
+          <!-- Category Title & Sort -->
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+            <div>
+              <h1 class="text-3xl lg:text-4xl font-bold mb-2" id="categoryTitle">All Products</h1>
+              <p class="text-gray-600" id="productCount">Showing all products</p>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="w-full sm:w-auto">
+              <select id="sortSelect" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-teal-600 transition">
+                <option value="default">Default Sorting</option>
+                <option value="popularity">Sort by Popularity</option>
+                <option value="rating">Sort by Rating</option>
+                <!-- <option value="price-low">Sort by Price: Low to High</option>
+                <option value="price-high">Sort by Price: High to Low</option> -->
+                <option value="newest">Sort by Newest</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Products Grid -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="productsGrid">
+            <!-- Products will be loaded here by JavaScript -->
+          </div>
+
+          <!-- No Products Message -->
+          <div id="noProducts" class="hidden text-center py-20">
+            <div class="text-6xl mb-4">📦</div>
+            <h3 class="text-2xl font-bold mb-2">No Products Found</h3>
+            <p class="text-gray-600 mb-6">Try adjusting your filters or browse all products.</p>
+            <a href="shop.html" class="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition font-semibold inline-block">
+              View All Products
+            </a>
+          </div>
+
+          <!-- Pagination -->
+          <div id="pagination" class="hidden mt-12 flex justify-center items-center gap-2">
+            <button class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition">Previous</button>
+            <button class="px-4 py-2 bg-teal-600 text-white rounded-lg">1</button>
+            <button class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition">2</button>
+            <button class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition">3</button>
+            <button class="px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition">Next</button>
+          </div>
+
+        </main>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-14">
+    <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-4 gap-10">
+      <div>
+        <h2 class="text-3xl text-white font-bold">UB Pharmacy</h2>
+        <p class="mt-4">JVS Tower, E-12/2 First Floor, Sector-1, Noida, Uttar Pradesh - 201301</p>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Know Us</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">About Us</a></li>
+          <li><a href="#" class="hover:text-white transition">Contact us</a></li>
+          <li><a href="#" class="hover:text-white transition">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Our Policies</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-white transition">Return Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Our Services</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Order Medicines</a></li>
+          <li><a href="#" class="hover:text-white transition">Book Lab Tests</a></li>
+          <li><a href="#" class="hover:text-white transition">Consult a Doctor</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
+      © 2026 UB Pharmacy. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

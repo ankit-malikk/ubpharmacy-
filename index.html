@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UB Pharmacy</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Top Bar -->
+  <div class="bg-teal-700 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-5 py-2 flex justify-between flex-wrap gap-3">
+      <div>📞 +91 8282829844</div>
+      <div>✉️ info@ubpharmacy.com</div>
+      <div>📍 Noida, Uttar Pradesh</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between gap-3 sm:gap-6">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+      <img src="photo/logo2.png" alt="UB Pharmacy Logo" class="h-10 sm:h-14 w-auto object-contain flex-shrink-0">
+      <div class="min-w-0">
+        <h1 class="font-bold text-lg sm:text-2xl text-teal-700 truncate">UB Pharmacy</h1>
+        <p class="hidden sm:block text-xs text-gray-500">Trusted Healthcare Partner</p>
+      </div>
+    </div>
+
+    <!-- Desktop search (visible md and up) -->
+    <div class="hidden md:flex flex-1 max-w-2xl">
+      <input type="text" placeholder="Search medicines, health products..." class="flex-1 border border-gray-300 rounded-l-xl px-5 py-3 outline-none min-w-0">
+      <button class="bg-teal-600 text-white px-8 rounded-r-xl hover:bg-teal-700 flex-shrink-0">Search</button>
+    </div>
+
+      <!-- Mobile search toggle -->
+      <!-- Right icons -->
+<div class="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+  <button id="mobileSearchBtn" class="md:hidden text-xl">🔍</button>
+
+
+
+  <a href="login.html" class="hidden sm:block font-medium hover:text-teal-600 transition">👤 Login</a>
+  <a href="login.html" class="sm:hidden text-xl">👤</a>
+</div>
+     
+      <a href="tel:+918282829844" class="hidden sm:block font-medium hover:text-teal-600 transition">
+  📞 Call Us
+</a>
+<a href="tel:+918282829844" class="sm:hidden text-xl">📞</a>
+      <a href="wishlist.html" class="relative font-medium hover:text-teal-600 transition">
+    <span class="hidden sm:inline">♡ Wishlist</span>
+    <span class="sm:hidden text-xl">♡</span>
+    <span id="wishlist-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 rounded-full">0</span>
+  </a>
+    </div>
+
+
+  </div>
+
+  <!-- Mobile search bar (hidden by default) -->
+  <div id="mobileSearchBar" class="hidden md:hidden px-4 pb-3">
+    <div class="flex">
+      <input type="text" placeholder="Search medicines, health products..." class="flex-1 border border-gray-300 rounded-l-xl px-4 py-2.5 outline-none min-w-0">
+      <button class="bg-teal-600 text-white px-5 rounded-r-xl hover:bg-teal-700 flex-shrink-0">Go</button>
+    </div>
+  </div>
+
+  <!-- existing nav with hamburger/categories goes here, unchanged -->
+   <nav class="border-t bg-white relative">
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between md:justify-start md:gap-8">
+
+    <div class="relative">
+      <button id="categoriesBtn" class="font-semibold text-teal-700 flex items-center gap-1 whitespace-nowrap">
+        ☰ All Categories
+      </button>
+    </div>
+
+    <div class="hidden md:flex gap-8 whitespace-nowrap">
+      <a href="#">Medicines</a>
+      <a href="#">Lab Tests</a>
+      <a href="#">Consult Doctor</a>
+      <a href="#">Ayurveda</a>
+      <a href="#">COVID-19</a>
+      <a href="#">Care Plan</a>
+    </div>
+
+    <button id="mobileNavBtn" class="md:hidden text-2xl text-teal-700">☰</button>
+  </div>
+
+  <!-- Categories panel (pushes content down) -->
+  <div id="categoriesMenu" class="hidden border-t bg-white">
+    <div class="max-w-7xl mx-auto px-5 py-2">
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Health Resource Center</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">All Diseases</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">All Medicines</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Medicines by Therapeutic Class</a>
+        </div>
+      </div>
+
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">OTC</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Respiratory Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">First Aid</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">General Wellness</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Mental Wellness</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Heart Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Diabetes Care</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Pain Relief &Bone Joint Care</a>
+        </div>
+      </div>
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Healthcare Devices</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Respiratory Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Support Wear &amp; Braces</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Health Devices</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Whell Chairs</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Pain Management</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Mobility Support Aids</a>
+        </div>
+      </div>
+       
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Personal Care</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Body Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Hair Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Skin Care</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Men's Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Women's Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Personal Hygiene</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Oral Care</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Eye Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Lips Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Ear Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Nail Care</a>
+        </div>
+      </div>
+
+<div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Wellness</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Weight Management</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Fitness Supplements</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Immunity Booster</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Sexual Wellness</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Quit Smoking</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Health Supplement</a>
+        </div>
+      </div>
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Mother &amp; Baby Care</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Baby &amp; Infant Care</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Mother &amp; Maternity Care</a>
+        </div>
+      </div>
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Ayurveda</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Baidyanath</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Patanjali</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Dabur</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition"> Himalaya</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Urban Pulse Herboceuticals</a>
+        </div>
+      </div>
+
+
+      <div class="category-item">
+        <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+          <span class="font-medium">Allopathy</span>
+          <span class="submenu-arrow transition-transform duration-200">⌄</span>
+        </button>
+        <div class="submenu hidden bg-slate-50 px-4">
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Tablet
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Gels</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Capsule</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Syrups</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Injections</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Creams</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">suspension</a>
+           <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Powder</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Ointment</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">I.V.Fluids</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Eridanus HealthCare</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Swisschem Healthcare</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Penardo Biotech</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Maksun Biotech</a>
+          <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Innovexia Life Sciences Pvt Ltd</a>
+        </div>
+      </div>
+
+      <div class="category-item">
+  <button class="category-toggle w-full flex items-center justify-between py-3 hover:text-teal-700 transition text-left border-b border-gray-100">
+    <span class="font-medium">Homeopathy</span>
+    <span class="submenu-arrow transition-transform duration-200">⌄</span>
+  </button>
+  <div class="submenu hidden bg-slate-50 px-4">
+    <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">SBL</a>
+    <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Schwabe</a>
+    <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Dr Reckeweg</a>
+    <a href="#" class="block py-2.5 text-sm hover:text-teal-700 transition">Adven Naturales</a>
+  </div>
+</div>
+     
+    </div>
+  </div>
+
+  <!-- Mobile dropdown links -->
+  <div id="mobileNavMenu" class="hidden md:hidden border-t bg-white px-5 py-3 flex flex-col gap-3">
+    <a href="#" class="py-1">Medicines</a>
+    <a href="#" class="py-1">Lab Tests</a>
+    <a href="#" class="py-1">Consult Doctor</a>
+    <a href="#" class="py-1">Ayurveda</a>
+    <a href="#" class="py-1">COVID-19</a>
+    <a href="#" class="py-1">Care Plan</a>
+  </div>
+</nav>
+</header>
+  <!-- Hero Banner Slider -->
+  <section class="hero">
+    <div id="bannerSlider">
+
+      <div id="slidesContainer">
+        <div class="slide" style="background-image: url('photo/banner1.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner2.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner3.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner4.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner5.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner6.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner7.jpg')"></div>
+        <div class="slide" style="background-image: url('photo/banner8.jpg')"></div>
+      </div>
+
+      <button id="prevBtn">&#8249;</button>
+      <button id="nextBtn">&#8250;</button>
+
+      <div id="dotsContainer"></div>
+
+    </div>
+  </section>
+
+  <!-- Explore Our Services -->
+  <section class="py-14 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="text-3xl font-bold text-center mb-10">Explore Our Services</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">💊</div><p class="mt-4 font-semibold">Order Medicines</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">🔬</div><p class="mt-4 font-semibold">Book Lab Test</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">🩺</div><p class="mt-4 font-semibold">Consult Doctor</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">🌿</div><p class="mt-4 font-semibold">Ayurveda</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">🏥</div><p class="mt-4 font-semibold">Healthcare Devices</p>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition text-center cursor-pointer">
+          <div class="text-5xl">❤️</div><p class="mt-4 font-semibold">Wellness</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop By Category -->
+<!-- Shop By Category -->
+<section class="py-16 bg-slate-100">
+  <div class="max-w-7xl mx-auto px-5">
+    <h2 class="text-4xl font-bold text-center mb-12">Shop By Category</h2>
+    <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+      
+      <!-- Allopathy -->
+      <a href="shop.html?category=allopathy" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/allopthay.jpg" alt="Allopathy" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Allopathy</h3>
+        <p class="text-sm text-gray-500 mt-2">150+ products</p>
+      </a>
+
+      <!-- Ayurveda -->
+      <a href="shop.html?category=ayurvedic" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/ayurvedic.jpg" alt="Ayurveda" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Ayurveda</h3>
+        <p class="text-sm text-gray-500 mt-2">4 products</p>
+      </a>
+
+      <!-- Baidyanath -->
+      <a href="shop.html?category=ayurvedic&brand=baidyanath" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/Baidyanath.jpg" alt="Baidyanath" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Baidyanath</h3>
+        <p class="text-sm text-gray-500 mt-2">1 product</p>
+      </a>
+
+      <!-- Dabur -->
+      <a href="shop.html?category=ayurvedic&brand=dabur" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/dabur.jpg" alt="Dabur" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Dabur</h3>
+        <p class="text-sm text-gray-500 mt-2">2 products</p>
+      </a>
+
+      <!-- Himalaya -->
+      <a href="shop.html?category=ayurvedic&brand=himalaya" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/Himalaya.jpg" alt="Himalaya" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Himalaya</h3>
+        <p class="text-sm text-gray-500 mt-2">2 products</p>
+      </a>
+
+      <!-- Patanjali -->
+      <a href="shop.html?category=ayurvedic&brand=patanjali" class="bg-white rounded-3xl p-6 text-center shadow hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer">
+        <img src="photo/Patanjali.jpg" alt="Patanjali" class="rounded-full mx-auto hover:scale-110 transition">
+        <h3 class="font-bold mt-5">Patanjali</h3>
+        <p class="text-sm text-gray-500 mt-2">1 product</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Trust Badges -->
+  <section class="bg-teal-700 text-white py-8">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div><div class="text-4xl">🛡️</div><h4 class="font-bold mt-3">100% Genuine Medicines</h4></div>
+        <div><div class="text-4xl">🚚</div><h4 class="font-bold mt-3">Fast Doorstep Delivery</h4></div>
+        <div><div class="text-4xl">🔒</div><h4 class="font-bold mt-3">Secure Payments</h4></div>
+        <div><div class="text-4xl">👨‍⚕️</div><h4 class="font-bold mt-3">Verified Pharmacists</h4></div>
+      </div>
+    </div>
+  </section>
+
+ <!-- COVID-19 Essentials -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold">Fight Against Corona</h2>
+      <a href="shop.html?category=corona" class="text-teal-600 font-semibold">View All →</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/corona/3-Ply-Face-Mask.jpg" alt="Mask" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">3-Ply Face Mask Without Nose Ring</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+            
+            <a href="product.html?id=mask-without-nose" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/corona/maskwithnoisering.jpg" alt="Mask with Nose Ring" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">3-Ply Face Mask With Nose Ring</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=mask-with-nose" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/corona/LIMCEE-TABLET-.jpg" alt="Vitamin C" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Limcee Tablet</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=limcee-tablet" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/corona/Raho-Safe-gel-hand-sanitizer.jpg" alt="Hand Sanitizer" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Raho Safe Hand Sanitizer</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=raho-safe-sanitizer" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Mother and Baby Care -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold">Mother and Baby Care</h2>
+      <a href="shop.html?category=baby-care" class="text-teal-600 font-semibold">View All →</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/BabyCare/Lal-Tail.jpg" alt="Lal Tail" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Dabur Lal Tail</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=dabur-lal-tail" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/BabyCare/Johnson-Baby-Powder.jpg" alt="Baby Powder" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Johnson's Baby Powder</h3>
+          <div class="flex items-center gap-1 mb-3">
+
+           <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=johnson-baby-powder" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/BabyCare/jb-soap.jpg" alt="Baby Soap" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Johnson's Baby Soap</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+
+            <a href="product.html?id=johnson-baby-soap" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/BabyCare/PAMPER-SMAL.jpg" alt="Pampers" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Pampers Small 2 Pcs</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+
+            <a href="product.html?id=pampers-small" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+  
+ <!-- Personal Care -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold">Personal Care</h2>
+      <a href="shop.html?category=personal-care" class="text-teal-600 font-semibold">View All →</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/PersonalCare/Vaseline-Petro.-J.jpg" alt="Vaseline" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Vaseline Pure Petroleum Jelly</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+  
+            <a href="product.html?id=vaseline-jelly" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/PersonalCare/Gillette-Gurd-Blade.jpg" alt="Gillette" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Gillette Guard Blade 6Pc</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=gillette-blade" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/PersonalCare/Himalaya-Neem-Face-.jpg" alt="Face Wash" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Himalaya Neem Face Wash</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=himalaya-neem-wash" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/PersonalCare/Livon-Silky.jpg" alt="Livon" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Livon Silky Serum</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=livon-serum" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+  <!-- Ayurvedic -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-5">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold">Ayurvedic</h2>
+      <a href="shop.html?category=ayurvedic" class="text-teal-600 font-semibold">View All →</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/ayurvedic/Baidyanath-Chitrakadi-Bati-T.jpg" alt="Baidyanath" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Baidyanath Chitrakadi Bati Tablets</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+
+            <a href="product.html?id=chitrakadi-bati" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/ayurvedic/Dabur-Pudin-Hara-Active-.jpg" alt="Pudin Hara" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Dabur Pudin Hara ACTIVE 10ml</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=pudin-hara" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/ayurvedic/Himalaya-Koflet-Lazenges.jpg" alt="Koflet" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Himalaya Koflet Lozenges</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★☆</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=koflet-lozenges" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
+        <img src="photo/ayurvedic/Patanjali-Neem-Kanti-Body-Cleanser-Soap-75g-.jpg" alt="Patanjali" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="font-bold text-xl mb-2">Patanjali Neem Kanti Soap 75g</h3>
+          <div class="flex items-center gap-1 mb-3">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <a href="product.html?id=neem-kanti-soap" class="bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-14">
+    <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-4 gap-10">
+      <div>
+        <h2 class="text-3xl text-white font-bold">UB Pharmacy</h2>
+        <p class="mt-4">JVS Tower, E-12/2 First Floor, Sector-1, Noida, Uttar Pradesh - 201301</p>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Know Us</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">About Us</a></li>
+          <li><a href="#" class="hover:text-white transition">Contact us</a></li>
+          <li><a href="#" class="hover:text-white transition">Careers</a></li>
+          <li><a href="#" class="hover:text-white transition">Press Coverage</a></li>
+          <li><a href="#" class="hover:text-white transition">Become a Health Partner</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4"> Our Policies</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+           <li><a href="#" class="hover:text-white transition">Editorial Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Return Policy</a></li>
+             <li><a href="#" class="hover:text-white transition">IP Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Our Services</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Order Medicines</a></li>
+          <li><a href="#" class="hover:text-white transition">Book Lab Tests</a></li>
+           <li><a href="#" class="hover:text-white transition">Consult a Doctor</a></li>
+            <li><a href="#" class="hover:text-white transition">Ayurveda Articles</a></li>
+             <li><a href="#" class="hover:text-white transition">Care Plan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
+      © 2026 UB Pharmacy. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

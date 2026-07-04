@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Product - UB Pharmacy</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- ✅ Load shared database FIRST -->
+  <script src="products-data.js"></script>
+  <!-- ✅ Then load product page logic -->
+  <script src="product.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Top Bar -->
+  <div class="bg-teal-700 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-5 py-2 flex justify-between flex-wrap gap-3">
+      <div>📞 +91 8282829844</div>
+      <div>✉️ info@ubpharmacy.com</div>
+      <div>📍 Noida, Uttar Pradesh</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between gap-3 sm:gap-6">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <img src="photo/logo2.png" alt="UB Pharmacy Logo" class="h-10 sm:h-14 w-auto object-contain flex-shrink-0">
+        <div class="min-w-0">
+          <h1 class="font-bold text-lg sm:text-2xl text-teal-700 truncate">
+            <a href="index.html">UB Pharmacy</a>
+          </h1>
+          <p class="hidden sm:block text-xs text-gray-500">Trusted Healthcare Partner</p>
+        </div>
+      </div>
+
+      <!-- Desktop search -->
+      <div class="hidden md:flex flex-1 max-w-2xl">
+        <input type="text" placeholder="Search medicines, health products..." class="flex-1 border border-gray-300 rounded-l-xl px-5 py-3 outline-none min-w-0">
+        <button class="bg-teal-600 text-white px-8 rounded-r-xl hover:bg-teal-700 flex-shrink-0">Search</button>
+      </div>
+
+   
+  <!-- Right icons -->
+<div class="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+  <button id="mobileSearchBtn" class="md:hidden text-xl">🔍</button>
+
+
+  <a href="login.html" class="hidden sm:block font-medium hover:text-teal-600 transition">👤 Login</a>
+  <a href="login.html" class="sm:hidden text-xl">👤</a>
+  
+  <a href="wishlist.html" class="relative font-medium hover:text-teal-600 transition">
+    <span class="hidden sm:inline">♡ Wishlist</span>
+    <span class="sm:hidden text-xl">♡</span>
+    <span id="wishlist-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 rounded-full">0</span>
+  </a>
+</div>
+        <!-- <a href="cart.html" class="relative font-medium">
+          <span class="hidden sm:inline">🛒 Cart</span>
+          <span class="sm:hidden text-xl">🛒</span>
+          <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 rounded-full">0</span>
+        </a> -->
+      </div>
+
+    </div>
+
+    <!-- Mobile search bar -->
+    <div id="mobileSearchBar" class="hidden md:hidden px-4 pb-3">
+      <div class="flex">
+        <input type="text" placeholder="Search medicines, health products..." class="flex-1 border border-gray-300 rounded-l-xl px-4 py-2.5 outline-none min-w-0">
+        <button class="bg-teal-600 text-white px-5 rounded-r-xl hover:bg-teal-700 flex-shrink-0">Go</button>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="border-t bg-white relative">
+      <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between md:justify-start md:gap-8">
+        <div class="relative">
+          <a href="index.html" class="font-semibold text-teal-700 flex items-center gap-1 whitespace-nowrap">
+            ☰ All Categories
+          </a>
+        </div>
+
+        <div class="hidden md:flex gap-8 whitespace-nowrap">
+          <a href="index.html" class="hover:text-teal-600 transition">Home</a>
+          <a href="shop.html" class="hover:text-teal-600 transition">Medicines</a>
+          <a href="#" class="hover:text-teal-600 transition">Lab Tests</a>
+          <a href="#" class="hover:text-teal-600 transition">Consult Doctor</a>
+          <a href="#" class="hover:text-teal-600 transition">Ayurveda</a>
+          <a href="#" class="hover:text-teal-600 transition">COVID-19</a>
+        </div>
+
+        <button id="mobileNavBtn" class="md:hidden text-2xl text-teal-700">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <section class="bg-gray-50 py-4 breadcrumb">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="flex items-center gap-2 text-sm text-gray-600">
+        <a href="index.html" class="hover:text-teal-600">Home</a>
+        <span>›</span>
+        <a href="shop.html?category=corona" class="hover:text-teal-600">Category</a>
+        <span>›</span>
+        <span class="text-gray-900 font-medium">Product Name</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Detail Section -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid lg:grid-cols-2 gap-12">
+
+        <!-- Left: Image Gallery -->
+        <div>
+          <div class="bg-gray-50 rounded-2xl overflow-hidden mb-4">
+            <img id="mainImage" src="photo/corona/3-Ply-Face-Mask.jpg" alt="Product" class="w-full h-[500px] object-contain p-8">
+          </div>
+          
+          <!-- Thumbnails -->
+          <div class="grid grid-cols-4 gap-3">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Right: Product Info -->
+        <div>
+         <h1 id="productTitle" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Product Name</h1>
+          
+          <!-- Rating -->
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-1">
+              <span class="text-yellow-400 text-xl">★★★★★</span>
+            </div>
+            <span class="text-gray-600">(0 customer reviews)</span>
+          </div>
+
+          <!-- Price -->
+          <!-- <div class="mb-6">
+            <div class="flex items-baseline gap-3">
+              <span class="text-4xl font-bold text-teal-700">₹0</span>
+              <span class="text-2xl text-gray-400 line-through">₹0</span>
+              <span class="bg-red-100 text-red-600 px-3 py-1 rounded-lg font-semibold">0% OFF</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">Inclusive of all taxes</p>
+          </div> -->
+
+          <!-- Short Description -->
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Loading product description...
+          </p>
+
+          <!-- Stock Status -->
+          <div class="mb-6">
+            <span class="inline-flex items-center gap-2 text-green-600 font-medium">
+              <span class="w-3 h-3 bg-green-600 rounded-full"></span>
+              In Stock
+            </span>
+          </div>
+          <!-- Wishlist Button -->
+<div class="mb-6">
+  <button id="wishlistBtn" class="flex items-center gap-2 border-2 border-gray-300 rounded-lg px-6 py-3 font-semibold hover:border-red-400 transition">
+    <span id="wishlistIcon" class="text-xl">🤍</span>
+    <span id="wishlistLabel">Add to Wishlist</span>
+  </button>
+</div>
+
+          <!-- Quantity Selector -->
+          <div class="mb-6">
+            <label class="block text-sm font-semibold mb-2">Quantity:</label>
+            <div class="flex items-center gap-3">
+              <button id="decreaseQty" class="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition font-bold">−</button>
+              <input type="number" id="quantity" value="1" min="1" max="10" class="w-20 h-10 text-center border-2 border-gray-300 rounded-lg font-semibold">
+              <button id="increaseQty" class="w-10 h-10 border-2 border-gray-300 rounded-lg hover:border-teal-600 hover:text-teal-600 transition font-bold">+</button>
+            </div>
+          </div>
+
+        <!-- Product Actions (Showcase) -->
+<!-- <div class="mb-8 p-6 bg-teal-50 rounded-xl border-2 border-teal-200">
+  <div class="flex items-center gap-3 mb-3">
+    <span class="text-2xl">ℹ️</span>
+    <h4 class="font-bold text-lg text-teal-900">Product Information</h4>
+  </div>
+  <p class="text-gray-700 mb-4">
+    This is a showcase website. For actual orders, please visit our physical store or contact us directly.
+  </p>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <a href="tel:+918282829844" class="flex-1 bg-teal-600 text-white py-3 px-6 rounded-lg hover:bg-teal-700 transition font-semibold text-center flex items-center justify-center gap-2">
+      📞 Call to Order
+    </a>
+    <a href="https://wa.me/918282829844" target="_blank" class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition font-semibold text-center flex items-center justify-center gap-2">
+      💬 WhatsApp
+    </a>
+  </div>
+</div> -->
+
+          <!-- Product Meta -->
+          <div class="border-t pt-6 space-y-3 text-sm">
+            <div class="flex gap-3">
+              <span class="font-semibold text-gray-700 min-w-[100px]">SKU:</span>
+              <span class="text-gray-600">-</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="font-semibold text-gray-700 min-w-[100px]">Category:</span>
+              <a href="shop.html?category=corona" class="text-teal-600 hover:underline">Category</a>
+            </div>
+            <div class="flex gap-3">
+              <span class="font-semibold text-gray-700 min-w-[100px]">Tags:</span>
+              <span class="text-gray-600">-</span>
+            </div>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t">
+            <!-- <div class="text-center">
+              <div class="text-3xl mb-2">🚚</div>
+              <p class="text-xs font-semibold">Free Delivery</p>
+            </div> -->
+            <div class="text-center">
+              <div class="text-3xl mb-2">🔒</div>
+              <p class="text-xs font-semibold">Secure Payment</p>
+            </div>
+            <div class="text-center">
+              <!-- <div class="text-3xl mb-2">↩️</div>
+              <p class="text-xs font-semibold">Easy Returns</p> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Tabs -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-5">
+      
+      <!-- Tab Buttons -->
+      <div class="flex flex-wrap gap-4 mb-8 border-b">
+        <button class="tab-btn active pb-4 px-6 font-semibold border-b-2 border-teal-600 text-teal-600" data-tab="description">
+          Description
+        </button>
+        <button class="tab-btn pb-4 px-6 font-semibold border-b-2 border-transparent text-gray-600 hover:text-teal-600" data-tab="additional">
+          Additional Information
+        </button>
+        <button class="tab-btn pb-4 px-6 font-semibold border-b-2 border-transparent text-gray-600 hover:text-teal-600" data-tab="reviews">
+          Reviews (0)
+        </button>
+      </div>
+
+      <!-- Tab Content -->
+      <div id="tab-content">
+        
+        <!-- Description Tab -->
+        <div class="tab-content active" id="description">
+          <div class="prose max-w-none">
+            <p>Loading product description...</p>
+          </div>
+        </div>
+
+        <!-- Additional Info Tab -->
+        <div class="tab-content hidden" id="additional">
+          <table class="w-full max-w-2xl">
+            <tbody class="divide-y">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Reviews Tab -->
+        <div class="tab-content hidden" id="reviews">
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold mb-6">Customer Reviews</h3>
+            
+            <!-- Review Item -->
+            <div class="bg-white p-6 rounded-xl shadow mb-4">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h4 class="font-bold">Rajesh Kumar</h4>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="text-yellow-400">★★★★★</span>
+                    <span class="text-sm text-gray-500">2 days ago</span>
+                  </div>
+                </div>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-lg text-sm font-medium">Verified Purchase</span>
+              </div>
+              <p class="text-gray-700">
+                Excellent quality! Very comfortable to wear for long hours. Highly recommended!
+              </p>
+            </div>
+
+            <!-- Add Review Button -->
+            <button class="mt-6 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition font-semibold">
+              Write a Review
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <h2 class="text-3xl font-bold mb-8">Related Products</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-14">
+    <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-4 gap-10">
+      <div>
+        <h2 class="text-3xl text-white font-bold">UB Pharmacy</h2>
+        <p class="mt-4">JVS Tower, E-12/2 First Floor, Sector-1, Noida, Uttar Pradesh - 201301</p>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Know Us</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">About Us</a></li>
+          <li><a href="#" class="hover:text-white transition">Contact us</a></li>
+          <li><a href="#" class="hover:text-white transition">Careers</a></li>
+          <li><a href="#" class="hover:text-white transition">Press Coverage</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Our Policies</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-white transition">Return Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-white font-semibold mb-4">Our Services</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Order Medicines</a></li>
+          <li><a href="#" class="hover:text-white transition">Book Lab Tests</a></li>
+          <li><a href="#" class="hover:text-white transition">Consult a Doctor</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
+      © 2026 UB Pharmacy. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
