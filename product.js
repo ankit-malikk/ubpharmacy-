@@ -229,20 +229,20 @@ updateWishlistCount();   // 👈 also run once on page load
    const relatedProductsContainer = document.querySelector('.grid.md\\:grid-cols-2.lg\\:grid-cols-4');
 if (relatedProductsContainer) {
   const relatedProducts = getRelatedProducts(product.relatedProducts);
-  relatedProductsContainer.innerHTML = relatedProducts.map(p => `
-    <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden">
-      <img src="${p.mainImage}" alt="${p.name}" class="w-full h-60 object-cover">
-      <div class="p-6">
-        <h3 class="font-bold text-xl mb-2">${p.name}</h3>
-        <div class="flex items-center gap-1 mb-4">
-          <span class="text-yellow-400">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</span>
-        </div>
-        <a href="product.html?id=${p.id}" class="block w-full text-center bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
-          Read More
-        </a>
+ relatedProductsContainer.innerHTML = relatedProducts.map(p => `
+  <div class="bg-white rounded-3xl shadow hover:shadow-2xl transition overflow-hidden flex flex-col">
+    <img src="${p.mainImage}" alt="${p.name}" class="w-full h-60 object-cover">
+    <div class="p-6 flex flex-col flex-1">
+      <h3 class="font-bold text-xl mb-2 line-clamp-2 min-h-[3.5rem]">${p.name}</h3>
+      <div class="flex items-center gap-1 mb-4">
+        <span class="text-yellow-400">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</span>
       </div>
+      <a href="product.html?id=${p.id}" class="mt-auto block w-full text-center bg-teal-600 text-white px-6 py-2.5 rounded-lg hover:bg-teal-700 transition font-medium">
+        Read More
+      </a>
     </div>
-  `).join('');
+  </div>
+`).join('');
   console.log('✅ Related products updated');
 }
 
